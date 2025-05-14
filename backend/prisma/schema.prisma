@@ -1,0 +1,43 @@
+// schema.prisma
+datasource db {
+  provider = "sqlite" // or "mysql" depending on your database
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Invoice {
+  id          String   @id @default(uuid())
+  number      String   @unique
+  issueDate   DateTime @default(now())
+  dueDate     DateTime
+  totalAmount Float
+  status      String // E.g. 'pending', 'paid', 'cancelled'
+  customerId  Int
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? 
+}
+
+model Item {
+  id          String  @id @default(uuid())
+  description String
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float   @default(0)
+  invoiceId   Int
+  User        User?   @relation(fields: [userId], references: [id])
+  userId      String? 
+}
+
+model User {
+  id        String    @id @default(uuid())
+  firstname String?
+  lastname  String?
+  email     String?   @unique
+  password  String?
+  invoice   Invoice[]
+  item      Item[]
+}

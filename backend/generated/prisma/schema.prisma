@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String       @id @default(uuid())
+  email      String?      @unique
+  password   String?
+  name       String?
+  ingamedata Ingamedata[]
+}
+
+model Ingamedata {
+  id              String            @id @default(uuid())
+  userId          String
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  characterName   String?
+  characterHp     Int?              @default(100)
+  characterLevel  Int?              @default(1)
+  attack          Int?              @default(0)
+  defense         Int?              @default(0)
+  crit            Int?              @default(0)
+  critChance      Int?              @default(0)
+  accuracy        Int?              @default(0)
+  evasion         Int?              @default(0)
+  type            String?
+  imagetype       String?
+  characterfriend Characterfriend[]
+  inventory       Inventory[]
+}
+
+model Characterfriend {
+  id           String      @id @default(uuid()) @db.Uuid
+  name         String?
+  type         String?
+  imagetype    String?
+  Ingamedata   Ingamedata? @relation(fields: [ingamedataId], references: [id])
+  ingamedataId String?
+}
+
+model Inventory {
+  id           String     @id @default(uuid())
+  name         String?
+  description  String?
+  quantity     Int?       @default(1)
+  ingamedataId String
+  ingamedata   Ingamedata @relation(fields: [ingamedataId], references: [id], onDelete: Cascade)
+}
