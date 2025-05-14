@@ -7,7 +7,7 @@ export class CreateSignUpDto {
     @IsString()
     @MinLength(10)
     username: string;
-
+    
     @IsString()
     @MinLength(6)
     password: string;
