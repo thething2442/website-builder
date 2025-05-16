@@ -1,43 +1,40 @@
 import {Button} from '../button'
-import {FileText} from 'lucide-react'
-const Navbar = () =>{
+import {Link} from 'react-router-dom'
+import {Rocket} from 'lucide-react'
+const Navbar =() =>{
   return(
-    <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-black/80 backdrop-blur">
-         <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <FileText className="h-6 w-6 text-red-500" />
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">InvoiceFlow</span>
-          </div>
-          <nav className="hidden md:flex gap-6">
-            <a href="#features" className="text-sm font-medium text-gray-300 hover:text-red-500 transition-colors">
-              Features
-            </a>
-            <a href="#how-it-works" className="text-sm font-medium text-gray-300 hover:text-red-500 transition-colors">
-              How It Works
-            </a>
-            <a href="#pricing" className="text-sm font-medium text-gray-300 hover:text-red-500 transition-colors">
-              Pricing
-            </a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-gray-700 text-gray-300 hover:bg-gray-900 hover:text-white"
-              asChild
-            >
-              <a href="/sign-in">Log in</a>
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white border-0"
-              asChild
-            >
-              <a href="/sign-up">Sign up</a>
-            </Button>
-          </div>
-        </div>
-    </header>
+    <header className="relative z-10 border-b border-red-400/20 backdrop-blur-sm">
+    <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Rocket className="h-8 w-8 text-pink-500" />
+        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-pink-500">
+          SiteForge
+        </span>
+      </div>
+      <nav className="hidden md:flex items-center gap-6">
+        <Link href="#features" className="text-white hover:text-red-400 transition-colors">
+          Features
+        </Link>
+        <Link href="#templates" className="text-white hover:text-red-400 transition-colors">
+          Templates
+        </Link>
+        <Link href="#pricing" className="text-white hover:text-red-400 transition-colors">
+          Pricing
+        </Link>
+        <Link href="#testimonials" className="text-white hover:text-red-400 transition-colors">
+          Testimonials
+        </Link>
+      </nav>
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" className="text-white hover:text-red-400 hover:bg-red-400/10">
+          Login
+        </Button>
+        <Button className="bg-gradient-to-r from-red-400 to-pink-500 hover:from-red-500 hover:to-pink-600 text-white border-none">
+          Sign Up Free
+        </Button>
+      </div>
+    </div>
+  </header>
   )
 }
 export default Navbar

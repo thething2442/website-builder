@@ -33,12 +33,59 @@ model Item {
 }
 
 model User {
-  id        String    @id @default(uuid())
+  id        String        @id @default(uuid())
   firstname String?
   lastname  String?
-  email     String?   @unique
+  email     String?       @unique
   password  String?
-  username  String?   @unique
+  username  String?       @unique
   invoice   Invoice[]
   item      Item[]
+  websites  WebsiteData[]
+}
+
+model Button {
+  id      String  @id @default(uuid())
+  name    String?
+  onClick String?
+  style   String?
+
+  WebsiteData   WebsiteData? @relation(fields: [websiteDataId], references: [id])
+  websiteDataId String?
+}
+
+model Input {
+  id          String  @id @default(uuid())
+  name        String?
+  placeholder String?
+  onChange    String?
+
+  WebsiteData   WebsiteData? @relation(fields: [websiteDataId], references: [id])
+  websiteDataId String?
+}
+
+model Textarea {
+  id            String       @id @default(uuid())
+  name          String?
+  placehilder   String?
+  data          String?
+  WebsiteData   WebsiteData? @relation(fields: [websiteDataId], references: [id])
+  websiteDataId String?
+}
+
+model WebsiteData {
+  id          String     @id @default(uuid())
+  webname     String?    @unique
+  description String?
+  httpaddress String?    @unique
+  webtitle    String?
+  webhero     String?
+  webnavbar   String?
+  weblinks    String?
+  webcta      String?
+  webutton    Button[]
+  webinput    Input[]
+  webtextarea Textarea[]
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?
 }

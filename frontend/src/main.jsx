@@ -2,6 +2,7 @@ import {createRoot} from 'react-dom/client'
 import {HelmetProvider} from 'react-helmet-async' // ✅ Add this
 import './index.css'
 import App from './App.jsx'
+import WebsiteCreator from './dashboard/website-creator.jsx'
 import About from "./public-pages/about.jsx"
 import Root from "./Root.jsx"
 import SignUp from "./authentications/Sign-Up.jsx"
@@ -13,6 +14,7 @@ import ProtectedRoutes from "./functions/Protected-Routes.jsx";
 import UserDashboard from "./dashboard/User.jsx";
 import Settings from "./dashboard/Settings.jsx";
 import DasboardLayout from "./dashboard/Root.jsx";
+import { Webcam } from 'lucide-react'
 
 const router = createBrowserRouter([
     {
@@ -40,7 +42,8 @@ const router = createBrowserRouter([
         ),
         children: [
             {index: true, Component: UserDashboard},
-            {path: 'settings', Component: Settings}
+            {path: 'settings', Component: Settings},
+            {path:'webengines',Component:WebsiteCreator}
         ]
 
     }

@@ -1,13 +1,11 @@
-import Navbar from './components/ui/sub-components/navbar'
 import Hero from './components/ui/sub-components/hero'
+import Navbar from './components/ui/sub-components/navbar'
 const App = () => {
 
     return (
         <div>
             <Navbar/>
-            <div className='flex-1 relative z-10'>
-                <Hero/>
-            </div>
+            <Hero />
         </div>
     )
 }
